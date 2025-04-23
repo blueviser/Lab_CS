@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Client</title>
+</head>
+<body>
+    <h1>Courses</h1>
+    <ul id="courses"></ul>
+
+    <script>
+        async function fetchCourses() {
+            const response = await fetch('https://localhost:<port>/api/courses');
+            const courses = await response.json();
+            const coursesList = document.getElementById('courses');
+
+            courses.forEach(course => {
+                const li = document.createElement('li');
+                li.textContent = `Id: ${course.id}, Title: ${course.title}, Duration: ${course.duration}, Description: ${course.description}`;
+                coursesList.appendChild(li);
+            });
+        }
+
+        fetchCourses();
+    </script>
+</body>
+</html>
